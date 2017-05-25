@@ -399,7 +399,7 @@ function! xolox#session#auto_load() " {{{2
       endfor
     endif
     " Default to the last used session or the default session?
-    let [has_last_session, session] = s:get_last_or_default_session()
+    let [has_last_session, session] = xolox#session#get_last_or_default_session()
     let path = xolox#session#name_to_path(session)
     if (g:session_default_to_last == 0 || has_last_session) && filereadable(path) && !s:session_is_locked(session, 'OpenSession')
       " Compose the message for the prompt.
@@ -1029,7 +1029,7 @@ function! s:last_session_forget()
   endif
 endfunction
 
-function! s:get_last_or_default_session()
+function! xolox#session#get_last_or_default_session()
   let last_session_file = s:last_session_file()
   let has_last_session = filereadable(last_session_file)
   if g:session_default_to_last && has_last_session
